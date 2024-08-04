@@ -1,0 +1,33 @@
+import re
+
+# Define the chatbot's patterns and responses
+patterns_responses = [
+    (r'hi|hello|hey', 'Hello! How can I assist you today?'),
+    (r'how are you ?', 'I am doing well, thank you! How about you?'),
+    (r'what is your name ?', 'I am a chatbot created by you.'),
+    (r'what can you do ?', 'I can have a simple conversation with you and answer some questions.'),
+    (r'bye|goodbye', 'Goodbye! Have a great day!'),
+    (r'(.*)', 'Sorry, I didn\'t understand that.')
+]
+
+def get_response(user_input):
+    # Iterate through patterns and responses
+    for pattern, response in patterns_responses:
+        if re.match(pattern, user_input, re.IGNORECASE):
+            return response
+    return 'Sorry, I didn\'t understand that.'
+
+def chatbot():
+    print("Chatbot: Hi! Type 'bye' to exit.")
+    
+    while True:
+        user_input = input("You: ")
+        if re.match(r'bye|goodbye', user_input, re.IGNORECASE):
+            print("Chatbot: Goodbye! Have a great day!")
+            break
+        
+        response = get_response(user_input)
+        print(f"Chatbot: {response}")
+
+if __name__ == "__main__":
+    chatbot()
